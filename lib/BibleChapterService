@@ -13,9 +13,15 @@ class BibleChapterService {
     book = book ?? 'genesis';
     chapter = chapter ?? '1';
 
-    final url = Uri.parse(
-      '$baseUrl/$translation/books/$book/chapters/$chapter.json',
+    final url;
+    
+    if (verse != null ) {
+      url = Uri.parse(
+        '$baseUrl/$translation/books/$book/chapters/$chapter/verses/$verse.json',
+      );
+    } else { url = Uri.parse('$baseUrl/$translation/books/$book/chapters/$chapter.json',
     );
+    }
 
     final response = await http.get(url);
 
